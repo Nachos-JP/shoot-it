@@ -31,6 +31,7 @@ export default {
   */
   plugins: [
     "~/plugins/vuetify.client.js",
+    "~/plugins/createTarget.js",
   ],
   /*
   ** Nuxt.js dev-modules
