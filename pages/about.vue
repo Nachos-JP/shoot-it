@@ -28,6 +28,26 @@
         </v-card-actions>
       </v-card>
     </v-row>
+
+    <v-row no-gutters justify="center">
+      <v-btn
+        v-for="(item, i) in builtItems"
+        :key="i"
+        class="ma-5"
+        dark
+        :href="item.url"
+        target="_blank"
+        icon
+        width="auto"
+        height="auto"
+        tile
+      >
+        <v-avatar tile width="300" height="130">
+          <img :src="item.icon" :style="item.style">
+        </v-avatar>
+      </v-btn>
+    </v-row>
+
   </v-container>
 </template>
 
@@ -45,6 +65,18 @@ export default {
           color: "#24292e",
           url: "https://github.com/Nachos-JP",
           icon: "fab fa-github",
+        },
+      ],
+      builtItems: [
+        {
+          url: "https://firebase.google.com",
+          icon: "/firebase-logo.svg",
+          style: "",
+        },
+        {
+          url: "https://nuxtjs.org/",
+          icon: "/nuxt-logo.svg",
+          style: "background: white; padding: 10px;"
         },
       ],
     };
