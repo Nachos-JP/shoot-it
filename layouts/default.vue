@@ -29,7 +29,7 @@
 
     <v-footer app>
       <v-spacer></v-spacer>
-      <div class="footer-text">{{ version }}</div>
+      <div class="overline">{{ version }}</div>
     </v-footer>
   </v-app>
 </template>
@@ -68,9 +68,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.footer-text {
-  font-size: 10px;
-}
-</style>

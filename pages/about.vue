@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid fill-height class="overflow-y-auto">
     <v-row no-gutters>
       <v-card class="mx-auto" outlined>
         <v-list-item three-line>
@@ -48,6 +48,34 @@
       </v-btn>
     </v-row>
 
+    <v-row no-gutters>
+      <v-card class="mx-auto" max-width="800" outlined>
+        <v-card-text class="headline text--primary pb-0">
+          <p class="mb-0">Made with</p>
+        </v-card-text>
+
+        <v-container fluid>
+          <v-row no-gutters justify="center">
+            <v-btn
+              v-for="(item, i) in madeItems"
+              :key="i"
+              class="ma-5"
+              dark
+              :href="item.url"
+              target="_blank"
+              icon
+              tile
+              width="auto"
+              height="auto"
+            >
+              <v-avatar tile width="60" height="60">
+                <img :src="item.icon">
+              </v-avatar>
+            </v-btn>
+          </v-row>
+        </v-container>
+      </v-card>
+    </v-row>
   </v-container>
 </template>
 
@@ -77,6 +105,20 @@ export default {
           url: "https://nuxtjs.org/",
           icon: "/nuxt-logo.svg",
           style: "background: white; padding: 10px;"
+        },
+      ],
+      madeItems: [
+        {
+          url: "https://vuejs.org/",
+          icon: "/vue-logo.svg",
+        },
+        {
+          url: "https://vuetifyjs.com/",
+          icon: "/vuetify-logo.svg",
+        },
+        {
+          url: "https://d3js.org/",
+          icon: "/d3-logo.svg",
         },
       ],
     };
