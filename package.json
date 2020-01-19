@@ -1,13 +1,16 @@
 {
   "name": "shoot-it",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "My slick Nuxt.js project",
   "author": "Shota Maekawa",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
     "start": "nuxt start",
+    "dev": "nuxt",
+    "build": "nuxt build && npm run build:copy:ssr",
+    "build:copy:ssr": "rimraf functions/ssr && mkdirp functions/ssr && cp -R .nuxt/dist functions/ssr/dist",
+    "serve": "firebase serve",
+    "deploy": "firebase deploy",
     "generate": "nuxt generate"
   },
   "dependencies": {

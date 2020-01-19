@@ -24,24 +24,24 @@
     </v-navigation-drawer>
 
     <v-content>
-      <nuxt />
+      <nuxt keep-alive />
     </v-content>
 
     <v-footer app>
       <v-spacer></v-spacer>
-      <div class="footer-text">{{ version }}</div>
+      <div class="overline">{{ version }}</div>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-import packageJson from "../package.json";
+const version = process.env.version;
 
 export default {
   data () {
     return {
       drawer: false,
-      version: packageJson.version,
+      version: version,
       navItems: [
         {
           icon: "fas fa-gamepad",
@@ -68,9 +68,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.footer-text {
-  font-size: 10px;
-}
-</style>

@@ -1,7 +1,11 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  srcDir: "src/",
   mode: 'universal',
+  env: {
+    version: process.env.npm_package_version,
+  },
   /*
   ** Headers of the page
   */
