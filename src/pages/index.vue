@@ -3,6 +3,9 @@
     <v-row no-gutters>
       <v-col align="center">
         <div id="shoot"></div>
+        <v-overlay absolute :value="!playing">
+          <v-btn @click.stop="play">Start</v-btn>
+        </v-overlay>
       </v-col>
     </v-row>
   </v-container>
@@ -12,19 +15,20 @@
 import * as d3 from "d3";
 
 export default {
-  mounted(){
-    const targetElem = document.getElementById("shoot");
-    const bound = targetElem.getBoundingClientRect();
-
-    const svg = d3.select(targetElem).append("svg")
-      .attr("width", bound.width)
-      .attr("height", bound.height);
-
-    const circle = this.$CreateCircle(svg);
-    circle.create();
-
-    const rect = this.$CreateRect(svg);
-    rect.create();
+  data(){
+    return {
+      playing: false,
+      scoring: false,
+    };
+  },
+  methods: {
+    async play(){
+      this.playing = true;
+      const targetElem = document.getElementById("shoot");
+      const game = new this.$Game(targetElem);
+      const score = await game.start();
+      console.log(score);
+    },
   },
 }
 </script>
