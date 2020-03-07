@@ -66,6 +66,8 @@ const Target = class {
   }
 };
 
+const round = (value, digit) => Math.round(value * 10**digit) / 10**digit;
+
 const Game = class {
   constructor(elem){
     this._elem = elem;
@@ -89,8 +91,8 @@ const Game = class {
   score(data){
     return {
       point: data.count.target * 10,
-      accuracy: data.count.target / data.count.all * 100,
-      time: Math.round((data.time.end - data.time.start)) / 1e3
+      accuracy: round(data.count.target/data.count.all*100, 2),
+      time: round((data.time.end-data.time.start)/1e3, 3),
     };
   }
 };
