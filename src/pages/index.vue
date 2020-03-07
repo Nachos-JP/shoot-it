@@ -33,6 +33,24 @@
           </v-card>
         </v-overlay>
 
+        <v-overlay absolute :value="scoring">
+          <v-card width="300">
+            <v-card-title class="headline">SCORE</v-card-title>
+            <v-list>
+              <v-list-item v-for="(value, key) in score" :key="key">
+                <v-list-item-content>{{ key }} :</v-list-item-content>
+                <v-list-item-content class="align-end">
+                  {{ value }}
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn @click.stop="scoring = false">close</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-overlay>
+
       </v-col>
     </v-row>
   </v-container>
@@ -50,6 +68,10 @@ export default {
         v => parseInt(v) < 1 ? "greater than 1" : false,
         v => parseInt(v) > 50 ? "less than 50" : false,
       ],
+      score: {
+        point: null,
+        accuracy: null,
+      },
     };
   },
   methods: {
@@ -57,6 +79,11 @@ export default {
       this.playing = true;
       const score = await this.game.start({targetNum: this.targetNum});
       this.playing = false;
+      this.score = {
+        point: score.point,
+        accuracy: score.accuracy,
+      };
+      this.scoring = true;
     },
   },
   mounted(){
