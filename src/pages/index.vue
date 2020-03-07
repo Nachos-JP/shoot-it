@@ -37,10 +37,10 @@
           <v-card width="300">
             <v-card-title class="headline">SCORE</v-card-title>
             <v-list>
-              <v-list-item v-for="(value, key) in score" :key="key">
-                <v-list-item-content>{{ key }} :</v-list-item-content>
+              <v-list-item v-for="(item, i) in scoreList" :key="i">
+                <v-list-item-content>{{ item.title }} :</v-list-item-content>
                 <v-list-item-content class="align-end">
-                  {{ value }}
+                  {{ item.value }} {{ item.unit }}
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -71,8 +71,18 @@ export default {
       score: {
         point: null,
         accuracy: null,
+        time: null,
       },
     };
+  },
+  computed: {
+    scoreList(){
+      return [
+        {title: "Point", value: this.score.point, unit: "p"},
+        {title: "Accuracy", value: this.score.accuracy, unit: "%"},
+        {title: "Time", value: this.score.time, unit: "sec"},
+      ];
+    },
   },
   methods: {
     async play(){
@@ -82,6 +92,7 @@ export default {
       this.score = {
         point: score.point,
         accuracy: score.accuracy,
+        time: score.time,
       };
       this.scoring = true;
     },

@@ -9,6 +9,8 @@ const Target = class {
     this._height = parseFloat(this._svg.style("height"));
     this._targetCount = 0;
     this._allCount = 0;
+    this._startTime = 0;
+    this._endTime = 0;
   }
 
   random(min, max){
@@ -26,6 +28,7 @@ const Target = class {
   start(option){
     return new Promise(resolve => {
       const size = this.getSize();
+      this._startTime = performance.now();
       this._svg.append("circle")
         .on("click", (d,i,nodes)=>{
           const newSize = this.getSize();
@@ -35,6 +38,7 @@ const Target = class {
 
           if(this._targetCount >= option.targetNum){
             this._allCount ++;
+            this._endTime = performance.now();
             d3.select(nodes[i]).remove();
             resolve();
           }
@@ -48,10 +52,16 @@ const Target = class {
     });
   }
 
-  getCount(){
+  getData(){
     return {
-      all: this._allCount,
-      target: this._targetCount,
+      count: {
+        all: this._allCount,
+        target: this._targetCount,
+      },
+      time: {
+        start: this._startTime,
+        end: this._endTime,
+      },
     };
   }
 };
@@ -71,15 +81,16 @@ const Game = class {
   async start(option){
     const target = new Target(this._svg);
     await target.start(option);
-    const count = target.getCount();
-    const score = this.score(count);
+    const data = target.getData();
+    const score = this.score(data);
     return Promise.resolve(score);
   }
 
-  score(count){
+  score(data){
     return {
-      point: count.target * 10,
-      accuracy: count.target / count.all * 100,
+      point: data.count.target * 10,
+      accuracy: data.count.target / data.count.all * 100,
+      time: Math.round((data.time.end - data.time.start)) / 1e3
     };
   }
 };
