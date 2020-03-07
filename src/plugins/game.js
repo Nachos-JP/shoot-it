@@ -23,7 +23,7 @@ const Target = class {
     };
   }
 
-  start(){
+  start(option){
     return new Promise(resolve => {
       const size = this.getSize();
       this._svg.append("circle")
@@ -33,8 +33,9 @@ const Target = class {
           d3.select(nodes[i]).attr("cy", newSize.cy);
           this._targetCount ++;
 
-          if(this._targetCount >= 3){
+          if(this._targetCount >= option.targetNum){
             this._allCount ++;
+            d3.select(nodes[i]).remove();
             resolve();
           }
         })
@@ -67,9 +68,9 @@ const Game = class {
       .attr("height", "100%");
   }
 
-  async start(){
+  async start(option){
     const target = new Target(this._svg);
-    await target.start();
+    await target.start(option);
     const count = target.getCount();
     const score = this.score(count);
     return Promise.resolve(score);
