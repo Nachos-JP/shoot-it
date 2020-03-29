@@ -1,6 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  server: {
+    host: "0.0.0",
+  },
   srcDir: "src/",
   mode: 'universal',
   env: {

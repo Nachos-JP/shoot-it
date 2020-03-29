@@ -1,0 +1,10 @@
+version: "2"
+services:
+  dev:
+    build: .
+    volumes:
+      - ./:/usr/src/shoot-it
+    working_dir: "/usr/src/shoot-it"
+    tty: true
+    ports:
+      - "3000:3000"
