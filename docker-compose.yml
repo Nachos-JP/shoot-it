@@ -5,6 +5,7 @@ services:
     volumes:
       - ./:/usr/src/shoot-it
     working_dir: "/usr/src/shoot-it"
+    command: npm run dev
     tty: true
     ports:
       - "3000:3000"
