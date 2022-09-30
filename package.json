@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@nuxtjs/pwa": "^3.0.0-0",
-    "d3": "^5.15.0",
+    "d3": "^7.6.1",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
